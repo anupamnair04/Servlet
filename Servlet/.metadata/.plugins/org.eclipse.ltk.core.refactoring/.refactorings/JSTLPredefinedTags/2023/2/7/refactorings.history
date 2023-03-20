@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;JSTLCustomTags/WebContent/Sql/Tag2.jsp&apos; to &apos;Insert.jsp&apos;" description="Rename resource &apos;Tag2.jsp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="WebContent/Sql/Tag2.jsp" name="Insert.jsp" stamp="1676631482266" updateReferences="true"/>
+</session>

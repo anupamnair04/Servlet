@@ -1,0 +1,12 @@
+package seed.jsp;
+
+import java.io.Serializable;
+
+public class UserBean implements Serializable{
+	
+	//Instance Variables
+	private String username;
+	private String pass;
+	private String dbDriver,dbUrl,dbUser,dbPass;
+
+}

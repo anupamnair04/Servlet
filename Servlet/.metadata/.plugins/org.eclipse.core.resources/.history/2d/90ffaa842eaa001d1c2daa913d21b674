@@ -1,0 +1,89 @@
+package seed.track;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class InsertData
+ */
+public class InsertData extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public InsertData() {
+        super();
+        
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//doGet(request, response);
+		
+		String username=request.getParameter("hfield");// Joy
+		PrintWriter out=response.getWriter();
+		out.print("Hello:"+username+"  This is insert Data Page");
+
+
+
+		// retrieve data from request object
+		int eno=Integer.parseInt(request.getParameter("eid"));
+		String ename=request.getParameter("ename");
+		Double esal=Double.parseDouble(request.getParameter("esal"));
+		
+		
+		try
+		{
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+
+			String url =("jdbc:oracle:thin:@localhost:1521:xe");
+
+			Connection con = DriverManager.getConnection(url, "system","anupam");
+
+/*  create table in database 
+ *  create table emptb(eid number,ename varchar2(20),esalary number);
+ */
+			PreparedStatement ps;
+			ps=con.prepareStatement("insert into emptb values(?,?,?)");
+			ps.setInt(1,eno);           
+			ps.setString(2,ename);
+			ps.setDouble(3,esal);
+			int i=ps.executeUpdate();
+			if(i>=1)
+			{
+				out.print("<br>Data Inserted Sucessfuly");  
+
+			}
+			else
+			{
+				out.print("<br>Data not added");
+			}
+		}
+		catch(SQLException | ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		out.println("<br><p align=right><a href='HiddenDemo.html'>LogOut</p></body>");
+	}
+}

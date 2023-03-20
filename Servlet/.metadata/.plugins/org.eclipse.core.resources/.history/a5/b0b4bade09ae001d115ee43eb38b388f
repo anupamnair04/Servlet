@@ -1,0 +1,98 @@
+package seed.jsp;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class UserBean {
+	
+	//Private Bean Properties
+	private String username;
+	private String pass;
+	private String dbDriver,dbUrl,dbUser,dbPass;
+	
+	//Constructors
+	public UserBean(){
+		super();
+	}
+	public UserBean(String username, String pass, String dbDriver, String dbUrl, String dbUser, String dbPass) {
+		super();
+		this.username = username;
+		this.pass = pass;
+		this.dbDriver = dbDriver;
+		this.dbUrl = dbUrl;
+		this.dbUser = dbUser;
+		this.dbPass = dbPass;
+	}
+	
+	//Getter Setter Methods
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPass() {
+		return pass;
+	}
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+	public String getDbDriver() {
+		return dbDriver;
+	}
+	public void setDbDriver(String dbDriver) {
+		this.dbDriver = dbDriver;
+	}
+	public String getDbUrl() {
+		return dbUrl;
+	}
+	public void setDbUrl(String dbUrl) {
+		this.dbUrl = dbUrl;
+	}
+	public String getDbUser() {
+		return dbUser;
+	}
+	public void setDbUser(String dbUser) {
+		this.dbUser = dbUser;
+	}
+	public String getDbPass() {
+		return dbPass;
+	}
+	public void setDbPass(String dbPass) {
+		this.dbPass = dbPass;
+	}
+	
+	//Business Logic
+	public boolean validateUser(){
+		
+		int result = 0;  
+		try{  
+		Class.forName("oracle.jdbc.driver.OracleDriver");     
+		Connection con = DriverManager.getConnection( "jdbc:oracle:thin:@localhost:1521:xe","system","anupam");  
+		PreparedStatement stmt = con.prepareStatement("insert into user(name,email) values(?,?)");  
+		stmt.setString(1, this.getUsername());  
+		stmt.setString(2, this.getEmail());  
+		result = stmt.executeUpdate();  
+		}catch(Exception e){  
+		System.out.println(e);  
+		}  
+		if(result == 1){  
+		return true;  
+		}else return false;  
+		
+		System.out.println("Username="+username);
+		System.out.println("Pass="+pass);
+		
+		
+			return false;
+
+	}
+	
+	//toString Methods
+	@Override
+	public String toString() {
+		return "UserBean [username=" + username + ", pass=" + pass + ", dbDriver=" + dbDriver + ", dbUrl=" + dbUrl
+				+ ", dbUser=" + dbUser + ", dbPass=" + dbPass + "]";
+	}
+}

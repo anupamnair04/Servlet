@@ -1,0 +1,107 @@
+package seed.jsp;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class EmpBean {
+
+	//Private Bean Properties
+	private String id;
+	private String name;
+	private String salary;
+	private String dbDriver,dbUrl,dbUser,dbPass;
+	
+	//Constructors
+	public EmpBean(){
+		super();
+	}
+	public EmpBean(String id, String name, String salary, String dbDriver, String dbUrl, String dbUser, String dbPass) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+		this.dbDriver = dbDriver;
+		this.dbUrl = dbUrl;
+		this.dbUser = dbUser;
+		this.dbPass = dbPass;
+	}
+
+	//Getter Setter Methods
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getSalary() {
+		return salary;
+	}
+	public void setSalary(String salary) {
+		this.salary = salary;
+	}
+	public String getDbDriver() {
+		return dbDriver;
+	}
+	public void setDbDriver(String dbDriver) {
+		this.dbDriver = dbDriver;
+	}
+	public String getDbUrl() {
+		return dbUrl;
+	}
+	public void setDbUrl(String dbUrl) {
+		this.dbUrl = dbUrl;
+	}
+	public String getDbUser() {
+		return dbUser;
+	}
+	public void setDbUser(String dbUser) {
+		this.dbUser = dbUser;
+	}
+	public String getDbPass() {
+		return dbPass;
+	}
+	public void setDbPass(String dbPass) {
+		this.dbPass = dbPass;
+	}
+	
+	//Business Logic
+	public boolean validateEmp(){
+			
+	try{  
+				
+	    Class.forName("oracle.jdbc.driver.OracleDriver"); 
+				
+	    Connection con = DriverManager.getConnection( "jdbc:oracle:thin:@localhost:1521:xe","system","anupam");  
+				
+	    PreparedStatement stmt = con.prepareStatement("select * from emp where id=?");  
+				
+	    stmt.setString(1, this.getId());    
+			
+	    ResultSet rs = stmt.executeQuery();
+			    
+	    if(rs.next()){
+	    	System.out.println("Valid Employee");
+		}else{
+			System.out.println("No Data Found");	
+		}
+	    }catch(Exception e){  
+		   System.out.println(e);  
+		}
+	       return false;  
+  	}
+			
+	//toString Methods
+	@Override
+	public String toString() {
+	 return "EmpBean [id=" + id + ", name=" + name + ", salary=" + salary + ", dbDriver=" + dbDriver + ", dbUrl="
+			+ dbUrl + ", dbUser=" + dbUser + ", dbPass=" + dbPass + "]";
+	}
+}

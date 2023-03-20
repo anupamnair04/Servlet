@@ -1,0 +1,86 @@
+package seed.jsp;
+
+public class EmpBean {
+
+	//Private Bean Properties
+	private String id;
+	private String name;
+	private String salary;
+	private String dbDriver,dbUrl,dbUser,dbPass;
+	
+	//Constructors
+	public EmpBean(){
+		super();
+	}
+	public EmpBean(String id, String name, String salary, String dbDriver, String dbUrl, String dbUser, String dbPass) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+		this.dbDriver = dbDriver;
+		this.dbUrl = dbUrl;
+		this.dbUser = dbUser;
+		this.dbPass = dbPass;
+	}
+
+	//Getter Setter Methods
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getSalary() {
+		return salary;
+	}
+	public void setSalary(String salary) {
+		this.salary = salary;
+	}
+	public String getDbDriver() {
+		return dbDriver;
+	}
+	public void setDbDriver(String dbDriver) {
+		this.dbDriver = dbDriver;
+	}
+	public String getDbUrl() {
+		return dbUrl;
+	}
+	public void setDbUrl(String dbUrl) {
+		this.dbUrl = dbUrl;
+	}
+	public String getDbUser() {
+		return dbUser;
+	}
+	public void setDbUser(String dbUser) {
+		this.dbUser = dbUser;
+	}
+	public String getDbPass() {
+		return dbPass;
+	}
+	public void setDbPass(String dbPass) {
+		this.dbPass = dbPass;
+	}
+	
+	//Business Logic
+		public boolean validateUser(){
+			System.out.println("Username="+username);
+			System.out.println("Pass="+pass);
+			if(username.equals(pass))
+				return true;
+			else
+				return false;
+		}
+		
+	//toString Methods
+	@Override
+	public String toString() {
+		return "EmpBean [username=" + username + ", pass=" + pass + ", dbDriver=" + dbDriver + ", dbUrl=" + dbUrl
+				+ ", dbUser=" + dbUser + ", dbPass=" + dbPass + "]";
+	}
+}
